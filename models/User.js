@@ -11,49 +11,51 @@ var UserSchema = new Schema({
           type: String,
           unique: true,
           required: true
-      },
-    password: {
-          type: String,
-          required: true
-      }
+      },   
+    twitter:{
+        id: {type: String},
+        token:{type: String}  
+    }
   });
 
-  User.path('email').validate(validator.isEmail(), 'Please provide a valid email address');
+  UserSchema.path('email').validate(validator.isEmail(), 'Please provide a valid email address');
 
-  User.pre('save',function(next){
-    var user = this;
-    if(!user.isModified('password')){
-        return next();
-    }
+//   UserSchema.pre('save',function(next){
+//     var user = this;
+//     if(!user.isModified('password')){
+//         return next();
+//     }
 
-    // hash the password along with our new salt
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(user.password, salt, function(err, hash) {
-            user.password = hash; 
-            next();
-        });
-    });
-});
+//     // hash the password along with our new salt
+//     bcrypt.genSalt(10, function(err, salt) {
+//         bcrypt.hash(user.password, salt, function(err, hash) {
+//             user.password = hash; 
+//             next();
+//         });
+//     });
+// });
 
-User.statics.findByCredentials = function(email, pwd){    
+UserSchema.statics.findOrCreate = function(token, tokenSecret, profile, done){
     let User = this;    
     return User.findOne({email}).then((user)=>{         
         if(!user){            
-            return Promise.reject(new Error('Usuario no existe'));
+            let user = new User();
+            user.email = profile.email;
+            user.twitter.id = profile.id;
+            user.twitter.token = token;
+
+            user.save(function(error, savedUser) {
+                if (error) {
+                      console.log(error);
+                }
+                return done(error, savedUser);
+          });
         }
 
         return new Promise((resolve, reject)=>{
-            bcrypt.compare(pwd, user.password).then((res)=>{
-                if(res){
-                    resolve(user);
-                }else{                
-                    reject(new Error('incorrect password'));
-                }
-            }).catch((e)=>{
-                console.log(e);
-            });
+           resolve(user);
         });
     });
 }
 
-module.exports = mongoose.model('user',User,'users');
+module.exports = mongoose.model('user',UserSchema,'users');
