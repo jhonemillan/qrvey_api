@@ -12,8 +12,7 @@ var UserSchema = new Schema({
     token:{type: String}      
   });
 
-UserSchema.statics.findOrCreate = function(token, tokenSecret, profile, done){
-    debugger;
+UserSchema.statics.findOrCreate = function(token, tokenSecret, profile, done){    
     let User = this;    
     return User.findOne({'id': profile.id}).then((user)=>{         
         if(!user){            
@@ -30,9 +29,7 @@ UserSchema.statics.findOrCreate = function(token, tokenSecret, profile, done){
           });
         }
 
-        return new Promise((resolve, reject)=>{
-           resolve(user);
-        });
+        done(null, user);
     });
 }
 

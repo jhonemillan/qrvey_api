@@ -2,6 +2,13 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
 
+var isAuthenticated = function (req, res, next) {
+	if (req.isAuthenticated())
+		return next();	
+	res.redirect('/');
+}
+
+
 module.exports = function(passport){
   console.log(passport);
   router.post('/signup', function(req, res) {
@@ -32,7 +39,7 @@ module.exports = function(passport){
     })
   });
 
-router.get('/test',function(res, res){
+router.get('/test',isAuthenticated, function(res, res){
   res.send('test');
 })
 
