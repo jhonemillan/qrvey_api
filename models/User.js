@@ -7,42 +7,20 @@ const validator = require('node-mongoose-validator');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    email: {
-          type: String,
-          unique: true,
-          required: true
-      },   
-    twitter:{
-        id: {type: String},
-        token:{type: String}  
-    }
+    id: {type: String},
+    username: {type: String},
+    token:{type: String}      
   });
 
-  UserSchema.path('email').validate(validator.isEmail(), 'Please provide a valid email address');
-
-//   UserSchema.pre('save',function(next){
-//     var user = this;
-//     if(!user.isModified('password')){
-//         return next();
-//     }
-
-//     // hash the password along with our new salt
-//     bcrypt.genSalt(10, function(err, salt) {
-//         bcrypt.hash(user.password, salt, function(err, hash) {
-//             user.password = hash; 
-//             next();
-//         });
-//     });
-// });
-
 UserSchema.statics.findOrCreate = function(token, tokenSecret, profile, done){
+    debugger;
     let User = this;    
-    return User.findOne({email}).then((user)=>{         
+    return User.findOne({'id': profile.id}).then((user)=>{         
         if(!user){            
             let user = new User();
-            user.email = profile.email;
-            user.twitter.id = profile.id;
-            user.twitter.token = token;
+            user.username = profile.username;
+            user.id = profile.id;
+            user.token = token;
 
             user.save(function(error, savedUser) {
                 if (error) {

@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
-var passport = require('passport');
-var passportTwitter= require('../config/passport');
 
-router.post('/signup', function(req, res) {
+module.exports = function(passport){
+  console.log(passport);
+  router.post('/signup', function(req, res) {
     debugger;    
     if (!req.body.username || !req.body.password) {
       res.json({success: false, msg: 'Please pass username and password.'});
@@ -32,14 +32,17 @@ router.post('/signup', function(req, res) {
     })
   });
 
+router.get('/test',function(res, res){
+  res.send('test');
+})
+
 router.get('/auth/twitter', passport.authenticate('twitter'));
 
 router.get('/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication
+  function(req, res) {    
     res.json(req.user);
   });
 
-
-  module.exports = router; 
+  return router;
+}
