@@ -28,19 +28,20 @@ mongoose.connect(config.database, { promiseLibrary: require('bluebird'), auto_re
     res.header("Access-Control-Allow-Origin", "*");
     next();
 });
+
   
-  var expressSession = require('express-session');
-  app.use(expressSession({secret: 'mySecret'}));
-  app.use(passport.initialize());
-  app.use(passport.session());
+//   var expressSession = require('express-session');
+//   app.use(expressSession({secret: 'mySecret'}));
+//   app.use(passport.initialize());
+//   app.use(passport.session());
 
-  // Initialize Passport
-var initPassport = require('./config/init');
-initPassport(passport);
+//   // Initialize Passport
+// var initPassport = require('./config/init');
+// initPassport(passport);
 
-//routes
-var routes = require('./routes/user')(passport);
-app.use('/', routes);
+// //routes
+var togglRoute = require('./routes/toggl');
+app.use('/toggl', togglRoute);
  
 app.listen(port, ()=>{
     console.log('Se conecta al puerto ' + port)

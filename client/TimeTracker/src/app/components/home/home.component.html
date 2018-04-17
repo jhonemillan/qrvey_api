@@ -1,0 +1,7 @@
+<h4 *ngIf="!auth.isAuthenticated()">
+  You need to log in
+</h4>
+
+<div *ngIf="auth.isAuthenticated()">
+  <app-toggl></app-toggl>
+</div>

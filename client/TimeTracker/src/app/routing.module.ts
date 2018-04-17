@@ -1,13 +1,12 @@
-import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { TogglComponent } from './components/toggl/toggl.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
-  { path: '',   component: LoginComponent},
-  { path: 'toggl', component: TogglComponent},
-  { path: 'login', component: LoginComponent},
+  { path: '', component: HomeComponent },
+  { path: 'callback', component: TogglComponent },
   { path: '**', redirectTo: '' }
 ];
 

@@ -12,12 +12,7 @@ export class AppComponent {
   title = 'app';
   user = {} as User;
 
-  constructor(private auth: AuthService) { }
-
-  AuthTwitter() {
-   this.auth.GetLoginTwitter().subscribe((data) => {
-      this.user = data;
-      console.log(this.user);
-   });
+  constructor(private auth: AuthService) { 
+    auth.handleAuthentication();
   }
 }

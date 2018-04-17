@@ -1,3 +1,5 @@
+import { TogglService } from './services/toggl.service';
+import { HomeComponent } from './components/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -6,6 +8,7 @@ import {FormsModule, ReactiveFormsModule, FormControl, NgControl} from '@angular
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing.module';
 import { AuthService } from './services/auth.service';
+
 import {
   MatButtonModule,
   MatButtonToggleModule,
@@ -42,13 +45,13 @@ import {
 } from '@angular/material';
 import 'hammerjs';
 import { TogglComponent } from './components/toggl/toggl.component';
-import { LoginComponent } from './components/login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TogglComponent,
-    LoginComponent
+    HomeComponent 
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,7 @@ import { LoginComponent } from './components/login/login.component';
     MatSnackBarModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, TogglService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

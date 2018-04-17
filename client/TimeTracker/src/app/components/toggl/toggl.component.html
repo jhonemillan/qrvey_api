@@ -1,3 +1,45 @@
-<p>
-  toggl works!
-</p>
+<form class="example-form">
+  <div>
+    <mat-form-field style="width: 80%">
+      <input matInput placeholder="Tarea">
+    </mat-form-field>
+
+    <h2>{{timer}}</h2>
+    <button mat-icon-button color="primary">
+      <mat-icon aria-label="Example icon-button with a heart icon">play_arrow</mat-icon>
+    </button>
+  
+    <button mat-icon-button color="primary">
+      <mat-icon aria-label="Example icon-button with a heart icon">stop</mat-icon>
+    </button>
+  
+    <button mat-icon-button color="primary" (click)="saveToggl()">
+      <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+    </button>    
+  </div>
+
+  
+</form>
+
+<div>                   
+
+    <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th >Task</th>
+            <th scope="col">Horas</th>
+            <th scope="col">Mins</th>
+            <th scope="col">Segs</th>                    
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let t of toggls">  
+            <td>{{t.task}}</td>
+            <td>{{t.horas}}</td>
+            <td>{{t.minutos}}</td>
+            <td>{{t.segundos}}</td>              
+          </tr>
+        </tbody>
+      </table>
+  
+</div> 
