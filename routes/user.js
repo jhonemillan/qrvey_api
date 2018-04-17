@@ -5,7 +5,7 @@ var User = require('../models/User');
 var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();	
-	res.redirect('/');
+	res.redirect('/login');
 }
 
 
@@ -46,9 +46,11 @@ router.get('/test',isAuthenticated, function(res, res){
 router.get('/auth/twitter', passport.authenticate('twitter'));
 
 router.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  passport.authenticate('twitter', { failureRedirect: '/test' }),
   function(req, res) {    
-    res.json(req.user);
+    console.log(req.user)
+    // res.status(200).json(req.user);
+    res.redirect('/toggl');
   });
 
   return router;

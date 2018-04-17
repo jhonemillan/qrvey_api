@@ -1,4 +1,7 @@
+import { User } from './model/user';
+import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  user = {} as User;
+
+  constructor(private auth: AuthService) { }
+
+  AuthTwitter() {
+   this.auth.GetLoginTwitter().subscribe((data) => {
+      this.user = data;
+      console.log(this.user);
+   });
+  }
 }

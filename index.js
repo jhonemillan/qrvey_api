@@ -22,6 +22,12 @@ mongoose.connect(config.database, { promiseLibrary: require('bluebird'), auto_re
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({ extended: false }));
   app.use(helmet());
+  app.use(express.static(path.join(__dirname, 'client/TimeTracker/dist')));
+
+  app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
   
   var expressSession = require('express-session');
   app.use(expressSession({secret: 'mySecret'}));
