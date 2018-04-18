@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'app';
   user = {} as User;
 
-  constructor(private auth: AuthService) { 
+  constructor(public auth: AuthService) {
     auth.handleAuthentication();
   }
 }

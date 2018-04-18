@@ -1,6 +1,6 @@
-<h4 *ngIf="!auth.isAuthenticated()">
-  You need to log in
-</h4>
+<div class="jumbotron" *ngIf="!auth.isAuthenticated()">
+    <h1 class="display-4">Please Login</h1>
+</div>
 
 <div *ngIf="auth.isAuthenticated()">
   <app-toggl></app-toggl>

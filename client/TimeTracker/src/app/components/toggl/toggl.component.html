@@ -1,19 +1,27 @@
 <form class="example-form">
   <div>
-    <mat-form-field style="width: 80%">
-      <input matInput placeholder="Tarea">
+    <mat-form-field style="width: 60%">
+      <input matInput placeholder="Task" [(ngModel)] = "this.toggl.task" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
 
-    <h2>{{timer}}</h2>
-    <button mat-icon-button color="primary">
+    <mat-form-field>
+        <mat-select placeholder="Projects">
+          <mat-option *ngFor="let p of projects" [value]="p.name">
+            {{ p.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <h2>{{this.toggl.horas}}: {{this.toggl.minutos}} : {{this.toggl.segundos}}</h2>
+    <button mat-icon-button color="primary" (click)="timeStart()">
       <mat-icon aria-label="Example icon-button with a heart icon">play_arrow</mat-icon>
     </button>
   
-    <button mat-icon-button color="primary">
+    <button mat-icon-button color="primary" (click)="timeStop()">
       <mat-icon aria-label="Example icon-button with a heart icon">stop</mat-icon>
     </button>
   
-    <button mat-icon-button color="primary" (click)="saveToggl()">
+    <button [disabled] = "!canSave" mat-icon-button color="primary" (click)="saveToggl()">
       <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
     </button>    
   </div>

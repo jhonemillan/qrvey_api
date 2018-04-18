@@ -8,7 +8,8 @@ var TogglSchema = new Schema({
     task: {type: String},
     horas:{type: Number},
     minutos: {type: Number},
-    segundos: {type: Number}
+    segundos: {type: Number},
+    date: { type: Date, default: Date.now }
   });
 
   module.exports = mongoose.model('toggl',TogglSchema,'toggl');

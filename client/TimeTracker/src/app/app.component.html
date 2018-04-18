@@ -1,32 +1,27 @@
 
     
-  <nav class="navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Qrvey</a>
-        <form class="form-inline">
-          <button class="btn btn-primary my-2 my-sm-0 mr-2"
-            routerLink="/" type="button">
-              Home
-          </button>
-  
-          <button id="qsLoginBtn"
+  <mat-toolbar color="primary">
+      <form class="form-inline">
+        
+          <button mat-icon-button color="white" id="qsLoginBtn"
             class="btn btn-primary my-2 my-sm-0"
             *ngIf="!auth.isAuthenticated()"
             (click)="auth.login()" type="button">
-              Log In
+            <mat-icon>perm_identity</mat-icon>
+              
           </button>
   
-          <button id="qsLogoutBtn"
+          <button mat-icon-button color="white" id="qsLogoutBtn"
             class="btn btn-primary my-2 my-sm-0"
             *ngIf="auth.isAuthenticated()"
             (click)="auth.logout()" type="button">
-              Log Out
-          </button>
-  
+            <mat-icon>lock</mat-icon>
+              
+          </button>  
         </form>
-  
+  </mat-toolbar>
 
-
+   
 <div role="main" class="container">
   <router-outlet></router-outlet>
 </div>

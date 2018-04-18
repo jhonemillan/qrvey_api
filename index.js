@@ -41,8 +41,10 @@ mongoose.connect(config.database, { promiseLibrary: require('bluebird'), auto_re
 
 // //routes
 var togglRoute = require('./routes/toggl');
+var projectRoute = require('./routes/project');
 app.use('/toggl', togglRoute);
- 
+app.use('/project', projectRoute);
+
 app.listen(port, ()=>{
     console.log('Se conecta al puerto ' + port)
 });

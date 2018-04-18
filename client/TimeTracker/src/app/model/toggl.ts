@@ -1,4 +1,4 @@
-export interface Toogl{
+export interface Toogl {
     id_profile: String;
     task: String;
     horas: Number;
