@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing.module';
 import { AuthService } from './services/auth.service';
 
+
 import {
   MatButtonModule,
   MatButtonToggleModule,
@@ -45,13 +46,15 @@ import {
 } from '@angular/material';
 import 'hammerjs';
 import { TogglComponent } from './components/toggl/toggl.component';
+import { ProjectComponent } from './components/project/project.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TogglComponent,
-    HomeComponent 
+    HomeComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,

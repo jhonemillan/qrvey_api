@@ -16,4 +16,18 @@ router.get('/all', (req, res)=>{
     })
 });
 
+router.post('/add',(req, res)=>{
+    let newProject = new Project();
+    newProject.name = req.body.name;
+
+    newProject
+    .save()
+    .then((p)=>{
+        res.status(201).send({success: true, project: p});
+    })
+    .catch((e)=>{
+        res.status(500).send({success: false, project: e.message});
+    })
+})
+
 module.exports = router;

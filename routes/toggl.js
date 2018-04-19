@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Toggl = require('../models/Toggl');
 
-router.get('/:id_profile/all', (req, res)=>{
-    
+router.get('/:id_profile/all', (req, res)=>{    
     Toggl.find({'id_profile' : req.params.id_profile})
     .sort({ date: 'desc'})
     .then((toggls)=>{

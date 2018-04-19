@@ -25,4 +25,8 @@ export class TogglService {
     return this.http.get<Project[]>(this.serviceUrl + '/project/all');
   }
 
+  addProject(name): Observable<any> {
+    return this.http.post(this.serviceUrl + 'project/add', name);
+  }
+
 }
